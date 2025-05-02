@@ -53,6 +53,20 @@ function testCrypto (impl) {
     })
   })
 
+  describe('HKDF-SHA-256', () => {
+    it('derives a key', async () => {
+      let key = Buffer.from('Tyr2ijHcA811dc+1hHSqR8FgkA+PMoxjDOzKXZ5AxKY', 'base64')
+      let salt = Buffer.from('fJxevhSQl92dcMURWQKOPQ==', 'base64')
+      let info = Buffer.from('hello world', 'utf8')
+
+      let derived = await impl.hkdfSha256.derive(key, salt, info, 256)
+
+      assert.equal(
+        derived.toString('base64'),
+        'HhiklahM2oBu2q/w7ZMEOUgDrDqbNWHb13efUpMvhYU=')
+    })
+  })
+
   describe('PBKDF2', () => {
     it('generates a salt', async () => {
       let salt = await impl.pbkdf2.generateSalt()
