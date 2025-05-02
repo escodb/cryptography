@@ -197,6 +197,9 @@ function testCrypto (impl) {
 const NodeCrypto = require('../lib/native/node_crypto')
 describe('crypto (node)', () => testCrypto(NodeCrypto))
 
+const OurCrypto = require('../lib/index')
+describe('crypto (ours)', () => testCrypto(OurCrypto))
+
 const version = process.version.match(/\d+/g).map((n) => parseInt(n, 10))
 
 if (version[0] >= 16) {
