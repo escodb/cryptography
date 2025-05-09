@@ -118,6 +118,19 @@ function testCrypto (impl) {
     })
   })
 
+  describe('AES-256', () => {
+    it('encrypts a block', async () => {
+      let key = Buffer.from('EEP3Jzj1d5Dg/A7jIxGmhy3WnMlCR3NarqBElitP1+4=', 'base64')
+      let msg = Buffer.from(' quick brown fox', 'utf8')
+
+      let data = await impl.aes256.encrypt(key, msg)
+
+      assert.equal(
+        data.toString('base64'),
+        'uP+aTPiiLhTPniCtOqT0kw==')
+    })
+  })
+
   describe('AES-256-GCM', () => {
     it('generates a key', async () => {
       let key = await impl.aes256gcm.generateKey()
